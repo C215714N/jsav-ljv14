@@ -18,7 +18,7 @@
         <!-- Lista de pendientes -->
         <section>
             <h2>Lista de Pendientes</h2>
-            <form id="todo" action="">
+            <form id="todo" class="flex-row" action="">
                 <label for="todo_input">Agregar tarea</label>
                 <input id="todo_input" type="text">
                 <button 
@@ -31,10 +31,33 @@
             <ul class="todo_list">
             </ul>
         </section>
+        <!-- Dimensiones del Navegador -->
+        <section>
+            <h2>Dimensiones del Navegador</h2>
+            <form id="browser-size" class="flex-row align-end">
+                <fieldset class="flex-row">
+                    <legend>Inner</legend>
+                    <label for="inner_width">width</label>
+                    <input id="inner_width" type="number">
+                    <label for="inner_height">height</label>
+                    <input id="inner_height" type="number">
+                </fieldset>
+                <fieldset class="flex-row">
+                    <legend>Outer</legend>
+                    <label for="outer_width">width</label>
+                    <input id="outer_width" type="number">
+                    <label for="outer_height">height</label>
+                    <input id="outer_height" type="number">
+                </fieldset>
+                <button type="button">calcular</button>
+                <button type="button">aplicar</button>
+            </form>
+        </section>
     </main>
     <!-- Footer -->
 
     <!-- Scripts -->
     <script src="scripts/todo.js"></script>
+    <script src="scripts/browser.js"></script>
 </body>
 </html>
