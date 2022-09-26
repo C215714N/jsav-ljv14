@@ -1,0 +1,39 @@
+*{
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: sans-serif;
+}
+/* Flexbox */
+[class*="flex"]{
+    display: flex;
+}
+.flex-row{
+    flex-direction: row;
+}
+.flex-column{
+    flex-direction: column;
+}   
+
+/* Lista de Pendientes */
+#todo label{
+    width: 0;
+    max-height: 0;
+    overflow: hidden;
+}
+[id*="todo_"]{
+    border: 1px solid #ccc;
+}
+#todo_input{
+    border-radius: .5rem 0 0 .5rem;
+}
+#todo_button{
+    border-radius: 0 .5rem .5rem 0;
+}
+.todo_list li{
+    color: #333;
+}
+.todo_list li.check{
+    color: #666;
+    text-decoration: line-through;
+    text-decoration-color: #248;
+}
