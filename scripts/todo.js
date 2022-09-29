@@ -2,6 +2,7 @@ const forms = document.querySelectorAll('form');
 const toDoInput = document.querySelector('#todo_input');
 const toDoButton = document.querySelector('#todo_button');
 const toDoList = document.querySelector('.todo_list');
+const remarkList = document.querySelector('.remark');
 
 let toDoItems = document.querySelectorAll('.todo_list li');
 
@@ -26,14 +27,17 @@ toDoInput.addEventListener('input', function () {
 toDoButton.addEventListener('click', function () {
     toDoList.innerHTML +=`<li>${toDoInput.value}</li>`
     toDoInput.value = '';
+    getListItems(toDoList);
 }   );
 
 // Identificacion de elementos Hijo
-toDoList.addEventListener('mouseover', function () {
-    const items = this.querySelectorAll('li');
+function getListItems (list = [], className = 'check') {
+    const items = list.querySelectorAll('li');
     items.forEach( (item, i) => {
         item.addEventListener('click', function () {
-            item.classList.toggle('check')
-            console.log(`presionaste el item ${i} que dice ${item.innerHTML}`)
+            item.classList.toggle(className)
     }   )  }
-)   }   );
+)   };
+
+// Invocacion Funcion para Capturar Elementos Hijos
+getListItems(remarkList, 'active');
