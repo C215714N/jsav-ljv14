@@ -40,4 +40,4 @@ function getListItems (list = [], className = 'check') {
 )   };
 
 // Invocacion Funcion para Capturar Elementos Hijos
-getListItems(remarkList, 'active');
+getListItems(remarkList);
