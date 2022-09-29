@@ -34,6 +34,23 @@
 .align-end{
     align-items: flex-end;
 }
+/* Position */
+[class*="p-"]{
+    position: var(--p);
+}
+.p-relative{
+    --p: relative;
+}
+.p-absolute{
+    --p: absolute;
+}
+.p-fixed{
+    --p: fixed;
+}
+.p-sticky{
+    --p: sticky;
+}
+
 /* Lista de Pendientes */
 #todo label{
     width: 0;
@@ -60,7 +77,70 @@
 .remark li.check{
     background-color: gold;
 }
-/*Dimensiones del Navegador*/
+/* Dimensiones del Navegador */
 #browser-size button{
     padding: calc(1rem - .05rem)
+}
+/* Galeria de Imagenes */
+#header{
+    min-height: min(100vh, 720px);
+    display: grid;
+    align-content: center;
+}
+.header{
+    line-height: .25;
+    text-align: center;
+    font-size: min(calc(2vw + var(--res)), var(--fontmax));
+}
+.small{
+    --res: .5rem;
+    --fontmax: 2rem;
+}
+.medium{
+    --res: .8rem;
+    --fontmax: 3.5rem;
+}
+.big{
+    --res: 1rem;
+    --fontmax: 5rem;
+}
+.gallery li{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: -1;
+    background:
+        var(--color)
+        linear-gradient(var(--bg))
+        center/cover
+        no-repeat;
+}
+.gallery li:nth-child(1n){
+    --color: hsl(0, 50%, 50%);
+    --bg: to right, #c33, #da3;
+}
+.gallery li:nth-child(2n){
+    --color: hsl(90, 50%, 50%);
+    --bg: to bottom, #3c6, #36c;
+}
+.gallery li:nth-child(3n){
+    --color: hsl(180, 50%, 50%);
+    --bg: to top left, #448, #c36;
+}
+.gallery li:nth-child(4n){
+    --color: hsl(270, 50%, 50%);
+    --bg: to bottom right, #8cc, #c33 ;
+}
+.gallery li:nth-child(5n){
+    --color: hsl(0, 50%, 50%);
+    --bg: to top right, #da3, #eee, #333;
+}
+.gallery .active{
+    opacity: 1;
+}
+.gallery p{
+    padding: 1rem;
+    bottom: 0;
 }
