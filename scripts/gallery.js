@@ -7,33 +7,38 @@ const btnPrev = d.querySelector('#header .icon-prev');
 const btnNext = d.querySelector('#header .icon-next');
 
 // Eventos
-btnPrev.addEventListener( 'click', () => getItem(gallery,'prev')
+btnPrev.addEventListener( 'click', () => changeItem('prev', gallery));
 
-);
-
-btnNext.addEventListener( 'click', () => getItem(gallery,'next'));
+btnNext.addEventListener( 'click', () => changeItem('next', gallery));
 
 // Funciones
-function getItem(array, type, className = 'active',) {
+function getItem(array, className = 'active') {
     for(i = 0; i < array.length; i++){
         if (array[i].classList.contains(className)){
             array[i].classList.remove(className);
-            changeItem(type, array, i);
-        }
-    }
-    newItem.classList.add(className);
-}
+            return i
+}   }   }
 
-function changeItem(type, array, i) {
+function changeItem(type, array) {
+    let newItem;
+    let i = getItem(array)
     switch (type){
     case 'next':
-        newItem = array[i + 1];
+        newItem = (
+            i < array.length - 1 ? 
+            array[i + 1]:
+            array[0]
+        )
     break;
     case 'prev':
-        newItem = array[i - 1];
+        newItem = (
+            i > 0 ? 
+            array[i - 1]:
+            array[array.length - 1]
+        )
     break;
     }
-    return
+    newItem.classList.add('active')
 }
 
 // Ejemplo Multiples Galerias
