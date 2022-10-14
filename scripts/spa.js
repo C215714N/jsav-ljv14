@@ -1,6 +1,7 @@
 const d = document;
 const w = window;
 const main = d.querySelector('main');
+const posts = d.querySelector('#posts')
 
 d.addEventListener( 'click', (e) => {
     let tag = e.target;
@@ -18,24 +19,25 @@ w.addEventListener('hashchange', (e) => {
     render(link, main)
 })
 
-function AJAX(element, url, m = 'get'){
-    // Instancia de la Clase
+function AJAX(req){
+    // State 0
     let xhr = new XMLHttpRequest();
-    // Consulta de Datos
-    xhr.open(m, url)
-    // Envio y procesamiento
+    // State 1
+    xhr.open(req.method, req.url)
+    // State 2 - 3
     xhr.send();
-    // ejecucion cuando se resuelva
+    // State 4
     xhr.addEventListener('load', () => {
-        if (xhr.status == 200){
-            // Renderizado en la pagina
-            element.innerHTML = xhr.response;
+        if (xhr.readyState == 4){
+        xhr.status == 200 ? 
+        req.callback(JSON.parse(xhr.response)) : 
+        AJAX( {
+            method: 'get',
+            url: 'router/404.html',
+            callback: (e) => console.log(e)
+        } )
         }
-        else if(xhr.status == 404){
-            // En caso de error
-            AJAX(main,'router/404.html')
-        }
-    }   )
+    } )
 }
 
 function render (link, element) {
@@ -43,6 +45,45 @@ function render (link, element) {
         link.length > 1 && // Largo mayor 1
         link.toLowerCase() != 'home' // debe ser distinto a home
     ) {
-        AJAX(element, `router/${link}.html`);
+        AJAX({
+            method: 'get',
+            url: `router/${link}.html`,
+            callback: (e) => insert(e, element),
+        });
     }
 }
+
+function insert(response, element){
+    element.innerHTML = response
+}
+
+// Callback HELL
+let backend = 'https://jsonplaceholder.typicode.com';
+
+AJAX({
+    method: 'get',
+    url: `${backend}/users`,
+    callback: (e) => AJAX({
+        method: 'get',
+        url: `${backend}/posts?userId=${e[0].id}`,
+        callback: (e) => e.forEach( post => AJAX({
+            method: 'get',
+            url: `${backend}/comments?postId=${post['id']}`,
+            callback: (e) => e.forEach( post => {
+                let article = document.createElement('article')
+                article.id = post.id;
+                article.setAttribute('target', post.postId);
+                article.className = 'post';
+                article.innerHTML = `
+                <h2>${post.name}</h2>
+                <p>${post.body}</p>
+                <address>
+                    email: <a href="${post.email}">${post.email}</a>
+                    en respuesta a la publicacion ${post.postId}
+                </address>`
+                posts.appendChild(article);
+            })
+        })
+        )
+    })
+})

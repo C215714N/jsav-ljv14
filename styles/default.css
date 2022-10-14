@@ -173,3 +173,9 @@ th,td{
     border: 1px solid #333;
     padding: 1rem;
 }
+.post{
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 .5rem #666;
+}
