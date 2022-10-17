@@ -1,0 +1,12 @@
+[
+    {
+        "userId": 1,
+        "userName": "c215714n",
+        "description": "instructor",
+        "cursos": [
+            "html",
+            "css",
+            "js"
+        ]
+    }
+]
