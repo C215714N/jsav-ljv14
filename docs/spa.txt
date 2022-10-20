@@ -1,8 +1,0 @@
-<h2>SPA (Single Page Application)</h2>
-
-<p>
-    Las aplicaciones web de una sola pagina hacer referencia a un tipo de implementacion utilizada al momento de desarrollar aplicaciones o sitios web. Consiste en utilizar un unico archivo de entrada y renderizar los contenidos a medida que se vayan solicitando los recursos.
-</p>
-<p>
-    En la actualidad existen varias Bibliotecas o Frameworks que facilitan la creacion de este tipo de elementos, entre ellos se encuentran <strong>ReactJs, Angular, VueJs</strong>
-</p>

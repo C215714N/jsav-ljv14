@@ -1,335 +1,54 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Avanzado</title>
-    <!-- Styles CSS -->
+    <title>Single Page Application</title>
     <link rel="stylesheet" href="styles/default.css">
+    <!-- CSS only -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet">
 </head>
 <body>
-    <!-- Cabecera -->
-    <header id="header" class="p-relative">
-        <div class="header big">
-            <h1>Javascript</h1>
-            <p>Ninja Developer</p>
-        </div>
-        <ul class="gallery">
-            <li class="active p-absolute">
-                <p class="p-absolute">
-                    <strong>HTML</strong>
-                    Lenguaje de marcado de hipertexto que utiliza etiquetas para definir el papel que cumple cada elemento dentro de la pagina, basicamente consiste en la estructura del documento.
-                </p>
-            </li>
-            <li class="p-absolute">
-                <p class="p-absolute">
-                    <strong>CSS</strong>
-                    Las Hojas de estilo en cascada utilizan selectores y reglas para definir la disposicion y apariencia de los elementos representados por el navegador, funcionando como lenguaje de Diseño.
-                </p>
-            </li>
-            <li class="p-absolute">
-                <p class="p-absolute">
-                    <strong>JS</strong>
-                    Lenguaje de programacion de FrontEnd que es interpretado por el navegador y utiliza tipado dinamico, la especificacion utilizada en la actualidad es ECMAscript.
-                </p>
-            </li>
-            <li class="p-absolute">
-                <p class="p-absolute">
-                    <strong>PHP</strong>
-                    PreProcesador de Hipertexto es el significado de las siglas de este lenguaje de programacion orientado a objetos que surge para darle dinamismo a las paginas web estaticas.
-                </p>
-            </li>
-            <li class="p-absolute">
-                <p class="p-absolute">
-                    <strong>GIT</strong>
-                    Sistema de control de versiones que funciona como un grafo dirigido aciclico para registrar los cambios realizados en un proyecto mediante confirmaciones, funciona como una maquina del tiempo para deshacer cambios no deseados.
-                </p>
-            </li>
+    <nav class="navbar navbar-dark navbar-expand-md | bg-dark bg-gradient sticky-top | p-2">
+        <a class="navbar-brand" href="#">SA</a>
+        <button class="navbar-toggler navbar-toggler-icon | border-0"
+            data-bs-target=".navbar-nav"
+            data-bs-toggle="collapse">
+        </button>
+        <ul class="navbar-nav navbar-collapse collapse">
+            <li class="nav-link active" id="users">Usuarios</li>
+            <li class="nav-link" id="profile">Perfil</li>
+            <li class="nav-link" id="posts">Publicaciones</li>
+            <li class="nav-link disabled" id="session">Cerrar Sesion</li>
         </ul>
-        <button class="header small p-absolute icon-prev">&lt;</button>
-        <button class="header small p-absolute icon-next">&gt;</button>
+    </nav>
+    <header class="bg-secondary bg-gradient | text-center | py-5 px-3">
+        <h1 class="display-1 fw-bold text-uppercase">Silk Avenue</h1>
+        <p class="h1">Coast 2 Coast</p>
+        <form class="container row | col-lg-6 | mx-auto">
+            <fieldset class="col-lg-9 | p-0">    
+                <input class="form-control" type="search" list="suggestion">
+                <datalist id="suggestion">
+                </datalist>
+            </fieldset>
+            <button class="btn btn-dark | col-lg">BUSCAR</button>
+        </form>
     </header>
-    <!-- Navegacion -->
-
-    <!-- Contenido -->
     <main>
-        <!-- Lista de pendientes -->
-        <section>
-            <h2>Lista de Pendientes</h2>
-            <form id="todo" class="flex-row" action="">
-                <label for="todo_input">Agregar tarea</label>
-                <input id="todo_input" type="text">
-                <button 
-                    id="todo_button" 
-                    type="button" 
-                    disabled="false">
-                    Agregar
-                </button>
-            </form>
-            <ul class="todo_list">
-            </ul>
-            <ul class="flex-column align-start remark">
-                <li>Fundamentos HTML</li>
-                <li>Maquetacion Web</li>
-                <li>Javascript desde Cero</li>
-                <li>Paradigma de Objetos</li>
-                <li>Git Desarrollo Colaborativo</li>
-            </ul>
-        </section>
-        <!-- Dimensiones del Navegador -->
-        <section>
-            <h2>Dimensiones del Navegador</h2>
-            <form id="browser-size" class="flex-row align-end">
-                <fieldset class="flex-row">
-                    <legend>Inner</legend>
-                    <label for="inner_width">width</label>
-                    <input id="inner_width" type="number">
-                    <label for="inner_height">height</label>
-                    <input id="inner_height" type="number">
-                </fieldset>
-                <fieldset class="flex-row">
-                    <legend>Outer</legend>
-                    <label for="outer_width">width</label>
-                    <input id="outer_width" type="number">
-                    <label for="outer_height">height</label>
-                    <input id="outer_height" type="number">
-                </fieldset>
-                <button type="button">calcular</button>
-                <button type="button">aplicar</button>
-            </form>
-        </section>
-        <!-- Propagacion de Eventos -->
-        <section id="propagation">
-            <h2 class="status">Propagacion de Eventos <span></span></h2>
-            <ul>
-                <li>menu 1
-                    <ul>
-                        <li>
-                            item 1
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 2
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 3
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 4
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 5
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>menu 2
-                    <ul>
-                        <li>
-                            item 1
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 2
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 3
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 4
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 5
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>menu 3
-                    <ul>
-                        <li>
-                            item 1
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 2
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 3
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 4
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 5
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>menu 4
-                    <ul>
-                        <li>
-                            item 1
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 2
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 3
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 4
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                        <li>
-                            item 5
-                            <ul>
-                                <li>link 1</li>
-                                <li>link 2</li>
-                                <li>link 3</li>
-                                <li>link 4</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
-        <!-- Cronometro -->
-        <section id="time">
-            <p>
-                <span id="hs">HH</span>:
-                <span id="min">mm</span>:
-                <span id="sec">ss</span>
-            </p>
-            <button>Iniciar</button>
-            <button>Detener</button>
-        </section>
-        <!-- Consulta XHR -->
-        <section id="XHR">
-            <h2>Consulta AJAX</h2>
-            <button id="spa">SPA</button>
-            <button id="ajax">AJAX</button>
-            <button id="rest">REST</button>
-            <article id="result">
 
-            </article>
-        </section>
     </main>
-    <!-- Footer -->
+    <section id="posts">
 
-    <!-- Scripts -->
-    <script src="scripts/gallery.js"></script>
-    <script src="scripts/todo.js"></script>
-    <script src="scripts/browser.js"></script>
-    <script src="scripts/propagation.js"></script>
-    <script src="scripts/event_loop.js"></script>
-    <script src="scripts/ajax.js"></script>
+    </section>
+    <footer>
+        <p>&copy;2022 Todos los derechos reservados</p>
+    </footer>
+    <!-- Scripts JS -->
+    <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js">
+    </script>
 </body>
 </html>
