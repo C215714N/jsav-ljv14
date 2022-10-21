@@ -146,6 +146,11 @@
     padding: 1rem;
     bottom: 0;
 }
+.pictures{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%,300px), 1fr));
+    gap: .5rem;
+}
 #header [class*="icon-"]{
     height: 100%;
     top: 0;

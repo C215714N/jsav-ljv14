@@ -1,3 +1,6 @@
+// Inmediatly Invoked Function Expression
+(
+    function (){ 
 const d = document;;
 const searchInput = d.querySelector('#searchInput');
 const suggestion = d.querySelector('#suggestion');
@@ -21,11 +24,17 @@ searchInput.addEventListener('input', (e) => {
     renderResults(term, links, suggestion) : null
 } )
 
-searchForm.addEventListener('submit', (e) => {
+searchForm.addEventListener('submit', async(e) => {
     e.preventDefault();
-    Array.from(e.target.elements).forEach(
-        field => console.log(field)
+    let url = 'https://jsonplaceholder.typicode.com'
+    let id = searchInput.value
+    let data = await getData(`${url}/${id}`)
+    main.innerHTML = (
+        id == 'photos' || id == 'albums' ?
+        renderGallery(data) :
+        renderTable(data)
     )
+    main.classList.add('pictures');
 } )
 
 function renderResults(word, array, tag){
@@ -37,7 +46,6 @@ function renderResults(word, array, tag){
         }        
     } ) ;
 }
-
 function renderTable(rows){
     return `
         <table class="table table-striped table-dark">
@@ -55,7 +63,8 @@ function renderHead(rows){
     let data = '';
     let theads = Object.keys(rows[0]);
     for (let th of theads){
-        data += `<td>${th}</td>`
+        typeof rows[0][th] != 'object' ?
+        data += `<td>${th}</td>` : ''
     }
     return data
 }
@@ -65,9 +74,8 @@ function renderCells(rows){
         let cell = ''
         let cells = Object.keys(row)
         for(td of cells){
-            cell += `<td>${
-                row[td] != '[object Object]' ?  row[td] : '' }
-            </td>`
+            typeof row[td] != 'object' ?
+            cell += `<td>${ row[td]} </td>` : null
         }
         data += `<tr>${cell}</tr>`
     }
@@ -89,8 +97,20 @@ function notFound(error){
     `
     return  data;
 }
-// main.innerHTML = renderTable();
-
+function renderGallery(images){
+    let data = '';
+    for (img of images){
+        console.log(img)
+        data +=`
+        <figure class="card text-light bg-dark">
+        <img class="card-header"
+            src="${img.thumbnailUrl}" 
+            alt="${img.title}"/>
+        <figcaption class="card-footer">${img.title}</figcaption>
+        </figure>`
+    }
+    return data
+}
 async function getData(url) {
     try{
         let data = await fetch(url);
@@ -110,3 +130,4 @@ d.addEventListener('click', async(e) => {
         main.innerHTML = renderTable(data)
     }
 } )
+})()
