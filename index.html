@@ -19,25 +19,27 @@
             data-bs-toggle="collapse">
         </button>
         <ul class="navbar-nav navbar-collapse collapse">
-            <li class="nav-link active" id="users">Usuarios</li>
+            <li class="nav-link remote active" id="users">Usuarios</li>
             <li class="nav-link" id="profile">Perfil</li>
-            <li class="nav-link" id="posts">Publicaciones</li>
+            <li class="nav-link remote" id="posts">Publicaciones</li>
+            <li class="nav-link remote" id="todos">Tareas</li>
+            <li class="nav-link remote" id="albums">Albumes</li>
             <li class="nav-link disabled" id="session">Cerrar Sesion</li>
         </ul>
     </nav>
     <header class="bg-secondary bg-gradient | text-center | py-5 px-3">
         <h1 class="display-1 fw-bold text-uppercase">Silk Avenue</h1>
         <p class="h1">Coast 2 Coast</p>
-        <form class="container row | col-lg-6 | mx-auto">
+        <form id="searchForm" class="container row | col-lg-6 | mx-auto">
             <fieldset class="col-lg-9 | p-0">    
-                <input class="form-control" type="search" list="suggestion">
+                <input id="searchInput" class="form-control" type="text" list="suggestion">
                 <datalist id="suggestion">
                 </datalist>
             </fieldset>
-            <button class="btn btn-dark | col-lg">BUSCAR</button>
+            <button id="searchButton" class="btn btn-dark | col-lg">BUSCAR</button>
         </form>
     </header>
-    <main>
+    <main class="overflow-auto vh-100 p-3">
 
     </main>
     <section id="posts">
@@ -47,6 +49,7 @@
         <p>&copy;2022 Todos los derechos reservados</p>
     </footer>
     <!-- Scripts JS -->
+    <script src="scripts/index.js"></script>
     <script 
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js">
     </script>
