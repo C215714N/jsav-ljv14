@@ -1,12 +1,16 @@
+"use strict";
+import { 
+    d,
+    searchInput,
+    suggestion,
+    searchButton,
+    searchForm,
+    main
+} from "./constants.js"
+
 // Inmediatly Invoked Function Expression
 (
     function (){ 
-const d = document;;
-const searchInput = d.querySelector('#searchInput');
-const suggestion = d.querySelector('#suggestion');
-const searchButton = d.querySelector('#searchButton');
-const searchForm = d.querySelector('#searchForm');
-const main = d.querySelector('main');
 
 let links = [
     'users',
@@ -29,7 +33,10 @@ searchForm.addEventListener('submit', async(e) => {
     let url = 'https://jsonplaceholder.typicode.com'
     let id = searchInput.value
     let data = await getData(`${url}/${id}`)
+    console.log(Object.keys(data).length == 0)
     main.innerHTML = (
+        Object.keys(data).length == 0 ?
+        notFound(data) :
         id == 'photos' || id == 'albums' ?
         renderGallery(data) :
         renderTable(data)
@@ -42,7 +49,7 @@ function renderResults(word, array, tag){
     array.forEach( r => {
         r = r.toLowerCase();
         if( r.startsWith(word) ){
-            tag.innerHTML +=`<option value="${value}">${value}</option>`;
+            tag.innerHTML +=`<option value="${r}">${r}</option>`;
         }        
     } ) ;
 }
@@ -73,7 +80,7 @@ function renderCells(rows){
     for (let row of rows){
         let cell = ''
         let cells = Object.keys(row)
-        for(td of cells){
+        for(let td of cells){
             typeof row[td] != 'object' ?
             cell += `<td>${ row[td]} </td>` : null
         }
@@ -99,8 +106,7 @@ function notFound(error){
 }
 function renderGallery(images){
     let data = '';
-    for (img of images){
-        console.log(img)
+    for (let img of images){
         data +=`
         <figure class="card text-light bg-dark">
         <img class="card-header"
@@ -127,7 +133,7 @@ d.addEventListener('click', async(e) => {
     if (el.classList.contains('remote')){
         url = 'https://jsonplaceholder.typicode.com'
         let data = await getData(`${url}/${el.id}`);
-        main.innerHTML = renderTable(data)
+        main.innerHTML = renderTable(await data)
     }
 } )
 })()
