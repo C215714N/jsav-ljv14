@@ -183,6 +183,8 @@ d.addEventListener('click', async(e) => {
             let data = await getData(`${url}/users/${userId}`)
             main.innerHTML = renderProfile(data)
         }
+    }
+    if(el.id == 'mode'){
         
     }
 } )
