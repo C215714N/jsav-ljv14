@@ -1,3 +1,3 @@
-export const setMode = (e) => {
-    localStorage.setItem("mode", e)
+export const setMode = (key, value) => {
+    window.localStorage.setItem(key, value)
 }

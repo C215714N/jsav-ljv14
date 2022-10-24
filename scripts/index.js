@@ -75,8 +75,7 @@ d.addEventListener('click', async(e) => {
     }
     if(el.id == 'mode'){
         let mode = localStorage.getItem("mode");
-        console.log(Boolean(mode), !mode)
-        
+        setMode("mode", mode === 'true' ? 'false' : 'true');
     }
 } )
 })()
