@@ -14,6 +14,7 @@ import { renderTable } from "./Tablas/table.js";
 import { getActions } from "./Tablas/actions.js";
 import { renderGallery } from "./Galeria/gallery.js";
 import { renderProfile } from "./Perfil/profile.js";
+import {setMode} from "./Modos/mode.js";
 // Inmediatly Invoked Function Expression
 (
     function (){ 
@@ -40,7 +41,6 @@ searchForm.addEventListener('submit', async(e) => {
     main.classList.add('pictures');
 } )
 
-
 function notFound(error){
     let data = ''
     data = `
@@ -58,7 +58,6 @@ function notFound(error){
     return  data;
 }
 
-
 d.addEventListener('click', async(e) => {
     let el = e.target
     if (el.classList.contains('remote')){
@@ -75,7 +74,9 @@ d.addEventListener('click', async(e) => {
         }
     }
     if(el.id == 'mode'){
-
+        let mode = localStorage.getItem("mode");
+        console.log(Boolean(mode), !mode)
+        
     }
 } )
 })()
