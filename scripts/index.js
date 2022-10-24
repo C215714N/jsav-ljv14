@@ -12,16 +12,6 @@ import {
 (
     function (){ 
 
-let links = [
-    'users',
-    'contact',
-    'posts',
-    'comments',
-    'todos',
-    'albums'
-]
-
-
 searchInput.addEventListener('input', (e) => {
     let term = e.target.value.toLowerCase();
     term.length >= 2 ?
@@ -73,6 +63,7 @@ function renderHead(rows){
         typeof rows[0][th] != 'object' ?
         data += `<td>${th}</td>` : ''
     }
+    data+=`<td>Actions</td>`
     return data
 }
 function renderCells(rows){
@@ -84,7 +75,10 @@ function renderCells(rows){
             typeof row[td] != 'object' ?
             cell += `<td>${ row[td]} </td>` : null
         }
-        data += `<tr>${cell}</tr>`
+        data += `
+        <tr">${cell}
+            <td><button class="btn btn-success">select</button></td>
+        </tr>`
     }
     return data;
 }
@@ -117,6 +111,13 @@ function renderGallery(images){
     }
     return data
 }
+function getActions(){
+    let buttons = d.querySelectorAll('.btn-success');
+    buttons.forEach(btn => btn.addEventListener('click', (e) => {
+        let userId = e.target.parentNode.parentNode.firstElementChild.innerText
+        window.sessionStorage.setItem("userId",userId.trim());
+    } ) )
+}
 async function getData(url) {
     try{
         let data = await fetch(url);
@@ -126,6 +127,44 @@ async function getData(url) {
         console.log(e)
     }
 }
+function renderProfile(user){
+    let generic = "assets/will.png";
+    let data = `<article id="user_${user.id}" class="card | col-xl-6 | mx-auto | text-light bg-secondary">
+        <header class="card-header | row">
+            <img class="col-md-3" src="${user.picture ? user.picture : generic}">
+            <div class="col-md-6">
+                <h2>${user.name}</h2>
+                <p>${user.username}</p>
+            </div>
+        </header>
+        <ul class="card-body row">
+            <li class="col-md list-unstyled">
+                <strong>Empresa</strong>
+                <ul class="list-group-flush">
+                    <li class="list-group-item">${user.company.name}</li>
+                    <li class="list-group-item">${user.company.catchPhrase}</li>
+                    <li class="list-group-item">${user.company.bs}</li>
+                </ul>
+            </li>
+            <li class="col-md list-unstyled">
+                <strong>Datos Personales</strong>
+                <ul class="list-group-flush">
+                    <li class="list-group-item">Calle: ${user.address.street}</li>
+                    <li class="list-group-item">Ciudad: ${user.address.city}</li>
+                    <li class="list-group-item">CP: ${user.address.zipcode}</li>
+                </ul>
+            </li>
+        </ul>
+        <footer class="card-footer">
+            <ul class="list-group-flush">
+                <li class="list-group-item"><strong>Telefono: </strong>${user.phone}</li>
+                <li class="list-group-item active"><strong>Correo: </strong>${user.email}</li>
+                <li class="list-group-item"><strong>Sitio Web: </strong>${user.website}</li>
+            </ul>
+        </footer>
+    </article>`
+    return data;
+}
 
 d.addEventListener('click', async(e) => {
     let el = e.target
@@ -133,7 +172,18 @@ d.addEventListener('click', async(e) => {
     if (el.classList.contains('remote')){
         url = 'https://jsonplaceholder.typicode.com'
         let data = await getData(`${url}/${el.id}`);
-        main.innerHTML = renderTable(await data)
+        console.log(data[0])
+        main.innerHTML = renderTable(data)
+        getActions();
+    }
+    if(el.id == 'profile'){
+        if (sessionStorage.getItem("userId") ) {
+            let userId = sessionStorage.getItem('userId');
+            let url = 'https://jsonplaceholder.typicode.com';
+            let data = await getData(`${url}/users/${userId}`)
+            main.innerHTML = renderProfile(data)
+        }
+        
     }
 } )
 })()
