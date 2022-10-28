@@ -3,25 +3,25 @@ import {
     modeOption 
 } from "../constants.js";
 
-export class Mode {
-    mode = localStorage.getItem('mode');
-    setMode = (key, value) => {
+export const setMode = (key, value) => {
+        let mode = localStorage.getItem('mode')
         window.localStorage.setItem(key, value)
     }
-    getMode = () => {
-        modeOption.innerHTML = `Modo ${this.mode ? this.mode : 'claro'}`
+    , getMode = () => {
+        let mode = localStorage.getItem('mode')
+        modeOption.innerHTML = `Modo ${mode ? mode : 'claro'}`
     }
-    changeMode = (config) => {
+    , changeMode = (config) => {
+        let mode = localStorage.getItem('mode')
         let tags = d.querySelectorAll(config.target);
         tags.forEach(tag => { config.prop.forEach( attr => {
-            this.mode == 'claro' ?
+            mode == 'claro' ?
             alterClass(tag, attr, config.color) :
             alterClass(tag, attr, config.color.sort())
         } ) } )
-    }
-    alterClass = (tag, attr, color) => {
+    };
+const alterClass = (tag, attr, color) => {
         attr === 'text' || attr === 'link' || attr === 'btn' ?
         tag.classList.replace(`${attr}-${color[0]}`, `${attr}-${color[1]}`) :
         tag.classList.replace(`${attr}-${color[1]}`, `${attr}-${color[0]}`)
     }
-}

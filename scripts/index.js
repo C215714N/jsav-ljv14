@@ -14,15 +14,15 @@ import { renderTable } from "./Tablas/table.js";
 import { getActions } from "./Tablas/actions.js";
 import { renderGallery } from "./Galeria/gallery.js";
 import { renderProfile } from "./Perfil/profile.js";
-import { Mode } from "./Modos/mode.js";
+import { getMode, changeMode, setMode }  from "./Modos/mode.js";
 // Inmediatly Invoked Function Expression
 (
     function (){ 
-searchInput.addEventListener('input', (e) => {
-    let term = e.target.value.toLowerCase();
-    term.length >= 2 ?
-    renderResults(term, links, suggestion) : null
-} )
+    searchInput.addEventListener('input', (e) => {
+        let term = e.target.value.toLowerCase();
+        term.length >= 2 ?
+        renderResults(term, links, suggestion) : null
+    } )
 
 searchForm.addEventListener('submit', async(e) => {
     e.preventDefault();
@@ -74,9 +74,9 @@ d.addEventListener('click', async(e) => {
     }
     if(el.id == 'mode'){
         let mode = localStorage.getItem("mode");
-        ModeButton.getMode();
-        ModeButton.setMode("mode", mode == 'claro' ? 'oscuro' : 'claro');
-        ModeButton.changeMode({
+        getMode();
+        setMode("mode", mode == 'claro' ? 'oscuro' : 'claro');
+        changeMode({
             target: '.mode',
             color: ['light', 'dark'],
             prop: ['text','bg','navbar']
@@ -84,9 +84,8 @@ d.addEventListener('click', async(e) => {
     }
 } )
 d.addEventListener('DOMContentLoaded', () => {
-    let ModeButton = new Mode();
-    ModeButton.getMode();        
-    ModeButton.changeMode({
+    getMode();        
+    changeMode({
         target: '.mode',
         color: ['light', 'dark'],
         prop: ['text','bg','navbar', 'btn', 'link']
