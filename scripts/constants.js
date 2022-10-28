@@ -24,3 +24,20 @@ export const getData = async (url) =>{
         console.log(e)
     }
 }
+
+export function notFound(error){
+    let data = ''
+    data = `
+        <article>
+            <h2>ERROR 404</h2>
+            <p>
+                Lo sentimos pero no encontramos la pagina, pero podes continuar la navegacion regresando al menu principal, desde el siguiente 
+                <a href="#">link</a>
+            </p>
+            <p>
+                aqui se detalla una breve descripcion del mismo ${error}
+            </p>
+        <article>
+    `
+    return  data;
+}

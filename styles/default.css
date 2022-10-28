@@ -187,3 +187,6 @@ th,td{
 :is(th ,td ):first-child{
     display: none;
 }
+.overflow{
+    overflow: auto;
+}
