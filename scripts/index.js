@@ -14,11 +14,10 @@ import { renderTable } from "./Tablas/table.js";
 import { getActions } from "./Tablas/actions.js";
 import { renderGallery } from "./Galeria/gallery.js";
 import { renderProfile } from "./Perfil/profile.js";
-import {setMode} from "./Modos/mode.js";
+import { Mode } from "./Modos/mode.js";
 // Inmediatly Invoked Function Expression
 (
     function (){ 
-
 searchInput.addEventListener('input', (e) => {
     let term = e.target.value.toLowerCase();
     term.length >= 2 ?
@@ -75,7 +74,22 @@ d.addEventListener('click', async(e) => {
     }
     if(el.id == 'mode'){
         let mode = localStorage.getItem("mode");
-        setMode("mode", mode === 'true' ? 'false' : 'true');
+        ModeButton.getMode();
+        ModeButton.setMode("mode", mode == 'claro' ? 'oscuro' : 'claro');
+        ModeButton.changeMode({
+            target: '.mode',
+            color: ['light', 'dark'],
+            prop: ['text','bg','navbar']
+        });
     }
 } )
+d.addEventListener('DOMContentLoaded', () => {
+    let ModeButton = new Mode();
+    ModeButton.getMode();        
+    ModeButton.changeMode({
+        target: '.mode',
+        color: ['light', 'dark'],
+        prop: ['text','bg','navbar', 'btn', 'link']
+    });
+})
 })()

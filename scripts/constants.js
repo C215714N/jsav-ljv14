@@ -1,4 +1,5 @@
 export const d = document,
+    modeOption = d.querySelector('#mode'),
     searchInput = d.querySelector('#searchInput'),
     suggestion = d.querySelector('#suggestion'),
     searchButton = d.querySelector('#searchButton'),
